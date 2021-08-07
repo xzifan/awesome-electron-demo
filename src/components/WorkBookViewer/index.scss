@@ -1,0 +1,12 @@
+.viewer-container {
+  width: 100%;
+  height: calc(100% - 48px);
+  
+  .workbook-desc, .workbook-sheets {
+    color: #555;
+    line-height: 20px;
+    height: 20px;
+    display: block;
+  }
+}
+

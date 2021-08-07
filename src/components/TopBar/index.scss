@@ -1,0 +1,20 @@
+.app-topbar {
+	width: 100%;
+	position: relative;
+
+	.topbar-draggable {
+		-webkit-app-region: drag;
+		user-select: none;
+		-webkit-user-select: none;
+		height: 48px;
+		width: 100%;
+		z-index: 99;
+	}
+
+	.topbar-options {
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 1000;
+	}
+}
