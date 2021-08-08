@@ -1,6 +1,8 @@
 const { app, BrowserWindow, ipcMain, Menu } = require('electron');
 const path = require('path')
-
+// const iconv = require('iconv-lite')
+const XLSX = require('xlsx');
+const loki = require('lokijs')
 // window对象的全局引用
 let mainWindow
 
@@ -20,9 +22,36 @@ app.on('ready', ()=>{
     },
     
   })
+
+  var db = new loki('workbooks.db')
+
+
   ipcMain.on('minimize-btn',()=>mainWindow.minimize())
   ipcMain.on('maximize',()=>mainWindow.maximize())
   ipcMain.on('close-btn',()=>mainWindow.close())
+  ipcMain.on('SaveDataFromPathToDB', (event, args)=>{ 
+    var workbook = XLSX.readFile(args)
+    
+    workbook.SheetNames.forEach(sheetname=>{
+      if (workbook.Sheets[sheetname]){
+        console.log(`Creating collection for sheet "${sheetname}" ......`)
+        var sheetContentJSON = XLSX.utils.sheet_to_json(workbook.Sheets[sheetname])
+        var sheetCollection = db.addCollection(sheetname)
+        
+        console.log(`Adding ${sheetContentJSON.length} items to collection` )
+        sheetCollection.insert(sheetContentJSON)
+      } 
+      console.log('Complete !')
+    })
+    var currentCollections = db.listCollections()
+    console.log("current collections:",currentCollections)
+    event.returnValue = currentCollections
+   })
+  ipcMain.on('GetCollectionNamesFromDB',(event)=>{
+    var currentCollections = db.listCollections()
+    console.log("current collections:",currentCollections)
+    event.returnValue = currentCollections
+  })
   // 开发环境
   mainWindow.loadURL('http://localhost:3000/');
 

@@ -4,6 +4,8 @@ import { InboxOutlined, LeftOutlined, LoadingOutlined } from '@ant-design/icons'
 import XLSX from 'xlsx';
 import WorkBookViewer from '../WorkBookViewer';
 import "./index.scss";
+import iconv from 'iconv-lite';
+
 const electron = window.require('electron');
 
 const {ipcRenderer} = electron;
@@ -12,7 +14,6 @@ const {ipcRenderer} = electron;
 const { Dragger } = Upload;
 
 function Excel(props) {
-	const [currFileList, setCurrFileList] = useState([])
 	const [currWorkBook, setCurrWorkBook] = useState()
 	const [fileLoading, setFileLoading] = useState()
 	const [container, setContainer] = useState(null);
@@ -22,7 +23,7 @@ function Excel(props) {
 		reader.readAsBinaryString(file)
 		console.log(file)
 		setFileLoading(file.name)
-		ipcRenderer.send('SaveDataFromPathToDB', encodeURIComponent(file.path));
+		const collectionNames = ipcRenderer.sendAsync('SaveDataFromPathToDB', file.path); //gbk解码中文字符
 		reader.onload = (event) => {
 			try {
 				const { result } = event.target
@@ -49,8 +50,7 @@ function Excel(props) {
 		},
 		onDrop(e) {
 			console.log('Dropped files', e.dataTransfer.files);
-		},
-		fileList: currFileList
+		}
 	};
 
 	// useEffect(() => {

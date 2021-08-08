@@ -24,6 +24,8 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.16.10",
+    "iconv-lite": "^0.6.3",
+    "lokijs": "^1.5.12",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
