@@ -1,12 +1,25 @@
 .viewer-container {
   width: 100%;
-  height: calc(100% - 48px);
+  height: calc(100%);
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
   
   .workbook-desc, .workbook-sheets {
     color: #555;
+    width: 100%;
     line-height: 20px;
-    height: 20px;
     display: block;
+  }
+  
+  .worksheet-confirm-btn {
+    // padding: 0 15px;
+    border-radius: 20px;
+    height: 36px;
+    position: absolute;
+    right: 0;
+    top: 50px;
   }
 }
 

@@ -1,13 +1,20 @@
 import { Table } from 'antd';
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import XLSX from 'xlsx';
+import './index.scss'
 
 export default (props) => {
   const worksheet = props.currentSheet
   const worksheetJSON = XLSX.utils.sheet_to_json(worksheet)
-  
-  const columns = Object.keys(worksheetJSON[0]).map((col, index)=>({ title: col, dataIndex: col, key: index,  }))
+  console.log(worksheet['!ref'],XLSX.utils.decode_range(worksheet['!ref']))
   const workSheetJSONBrief = worksheetJSON.slice(0,100)
+  console.log(workSheetJSONBrief)
+
+  let columns = []
+  if (workSheetJSONBrief[0])
+    columns = Object.keys(workSheetJSONBrief[0]).map((col, index)=>({ title: col, dataIndex: col, key: index, ellipsis: {showTitle: false}, }))
+  else columns = []
+
   // .map(item=>{
   //   const obj = {}
   //   Object.keys(item).map((key,index)=>{
@@ -15,9 +22,8 @@ export default (props) => {
   //   })
   //   return obj 
   // })
-  console.log(workSheetJSONBrief, columns)
+  // console.log(workSheetJSONBrief, columns)
   return <div className="sheet-container">
-      <div className="sheet-preview">
       {
         props.currentSheet && 
           <Table 
@@ -26,7 +32,7 @@ export default (props) => {
             size="small"
             dataSource={workSheetJSONBrief} 
             columns={ columns }
-            // scroll={{x: 'max-content'}}
+            scroll={{x: 'max-content'}}
             pagination={{
               position: 'topRight',
               defaultPageSize: 15
@@ -34,6 +40,5 @@ export default (props) => {
           >
           </Table>
       }
-    </div>
   </div>
 }
