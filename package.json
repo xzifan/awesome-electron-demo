@@ -23,6 +23,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "create-react-app":"3.4.1",
     "antd": "^4.16.10",
     "iconv-lite": "^0.6.3",
     "lokijs": "^1.5.12",
