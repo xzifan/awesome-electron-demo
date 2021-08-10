@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import XLSX from 'xlsx';
 import './index.scss'
 
-export default (props) => {
+const worksheetViewer = (props) => {
   const worksheet = props.currentSheet
   const worksheetJSON = XLSX.utils.sheet_to_json(worksheet)
   console.log(worksheet['!ref'],XLSX.utils.decode_range(worksheet['!ref']))
@@ -42,3 +42,5 @@ export default (props) => {
       }
   </div>
 }
+
+export default worksheetViewer;
