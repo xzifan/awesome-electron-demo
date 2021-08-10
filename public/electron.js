@@ -53,13 +53,13 @@ app.on('ready', ()=>{
     event.returnValue = currentCollections
   })
   // 开发环境
-  mainWindow.loadURL('http://localhost:3000/');
+  // mainWindow.loadURL('http://localhost:3000/');
 
   // 生产环境 
-  // mainWindow.loadFile(`./build/index.html`);
+  mainWindow.loadFile(`./build/index.html`);
 
   // 打开开发者工具，默认不打开
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
   // 关闭window时触发下列事件.
   mainWindow.on('closed', function () {

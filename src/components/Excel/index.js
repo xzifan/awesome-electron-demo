@@ -23,12 +23,12 @@ function Excel(props) {
 		reader.readAsBinaryString(file)
 		console.log(file)
 		setFileLoading(file.name)
-		const collectionNames = ipcRenderer.sendAsync('SaveDataFromPathToDB', file.path); //gbk解码中文字符
+		const collectionNames = ipcRenderer.send('SaveDataFromPathToDB', file.path); //gbk解码中文字符
 		reader.onload = (event) => {
 			try {
 				const { result } = event.target
 				const workbook = XLSX.read( result , { type: 'binary' });
-				// console.log(workbook)
+				console.log(workbook)
 				setCurrWorkBook({...workbook, Source: {FileName: file.name, LastModified: file.lastModifiedDate }})
 				setFileLoading()
 			} catch (error) {
@@ -46,7 +46,7 @@ function Excel(props) {
 		beforeUpload: getFileData,
 		onChange(info) {
 			console.log('onchange info:', info)
-			setFileLoading(info.file.name)
+			// setFileLoading(info.file.name)
 		},
 		onDrop(e) {
 			console.log('Dropped files', e.dataTransfer.files);
