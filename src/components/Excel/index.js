@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { Upload, message, Spin } from 'antd';
+import React, { useState } from 'react'
+import { Upload, Spin } from 'antd';
 import { InboxOutlined, LeftOutlined, LoadingOutlined } from '@ant-design/icons';
 import XLSX from 'xlsx';
 import WorkBookViewer from '../WorkBookViewer';
 import "./index.scss";
-import iconv from 'iconv-lite';
 
 const electron = window.require('electron');
 
@@ -23,7 +22,7 @@ function Excel(props) {
 		reader.readAsBinaryString(file)
 		console.log(file)
 		setFileLoading(file.name)
-		const collectionNames = ipcRenderer.send('SaveDataFromPathToDB', file.path); //gbk解码中文字符
+		ipcRenderer.send('SaveDataFromPathToDB', file.path); //gbk解码中文字符
 		reader.onload = (event) => {
 			try {
 				const { result } = event.target

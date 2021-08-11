@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import './index.scss';
-import { MinusOutlined, CloseOutlined, FullscreenOutlined } from '@ant-design/icons';
+import { MinusOutlined, CloseOutlined } from '@ant-design/icons';
 
 function TopBar(props) {
 	useEffect(() => {
 		console.log(window.__custom_menu)
 	})
-	const [minimized, setMinimized] = useState(false)
+	// const [minimized, setMinimized] = useState(false)
 
 	return <div className="app-topbar">
 		<div className="topbar-draggable">

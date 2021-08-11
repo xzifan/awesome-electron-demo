@@ -1,5 +1,5 @@
 import { Table } from 'antd';
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import XLSX from 'xlsx';
 import './index.scss'
 

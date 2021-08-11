@@ -1,7 +1,6 @@
 import { ArrowRightOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import { Button, Card, Menu, Modal } from 'antd'
+import { Button, Menu, Modal } from 'antd'
 import React, { useState } from 'react'
-import XLSX from 'xlsx';
 import WorkSheetViewer from '../WorkSheetViewer';
 import './index.scss';
 

@@ -1,12 +1,9 @@
 import './App.scss';
-import { Button, message, Icon, Menu } from 'antd';
-import { useState } from 'react';
+// import { Button, message, Icon, Menu } from 'antd';
 import Excel from './components/Excel';
 import TopBar from './components/TopBar';
-import { EllipsisOutlined, FileExcelOutlined } from '@ant-design/icons';
 
 function App() {
-  const [current, setCurrent] = useState('main')
   return (
     <div className="App">
       <TopBar />
