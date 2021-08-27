@@ -5,30 +5,25 @@ import XLSX from 'xlsx';
 import WorkBookViewer from '../WorkBookViewer';
 import "./index.scss";
 
-const electron = window.require('electron');
-
-const {ipcRenderer} = electron;
-// console.log(ipcRenderer)
 
 const { Dragger } = Upload;
 
 function Excel(props) {
 	const [currWorkBook, setCurrWorkBook] = useState()
 	const [fileLoading, setFileLoading] = useState()
-	const [container, setContainer] = useState(null);
 
 	const getFileData = (file) => {
 		const reader = new FileReader()
 		reader.readAsBinaryString(file)
 		console.log(file)
 		setFileLoading(file.name)
-		ipcRenderer.send('SaveDataFromPathToDB', file.path); //gbk解码中文字符
+		// ipcRenderer.send('SaveDataFromPathToDB', file.path); 
 		reader.onload = (event) => {
 			try {
 				const { result } = event.target
 				const workbook = XLSX.read( result , { type: 'binary' });
 				console.log(workbook)
-				setCurrWorkBook({...workbook, Source: {FileName: file.name, LastModified: file.lastModifiedDate }})
+				setCurrWorkBook({...workbook, Source: {FileName: file.name, LastModified: file.lastModifiedDate, FilePath: file.path }})
 				setFileLoading()
 			} catch (error) {
 				console.log(error)
@@ -58,7 +53,7 @@ function Excel(props) {
 	// 	}
 	// }, [currWorkBook])
 
-	return <div className="excel-container" ref={setContainer}>
+	return <div className="excel-container">
 		{currWorkBook && <LeftOutlined className="app-button button-return" onClick={() => setCurrWorkBook()} />}
 		{!currWorkBook ?
 			<Dragger {...draggerProps} className="excel-dragger" accept=".xls, .xlsx" id="drag_test" style={{filter: fileLoading ? 'blur(5px)' : 'none' }}>
@@ -71,7 +66,7 @@ function Excel(props) {
 					band files
 				</p>
 			</Dragger>
-			: <WorkBookViewer workbook={currWorkBook} container={container}/>
+			: <WorkBookViewer workbook={currWorkBook}/>
 		}
 		{	fileLoading &&
 			<div className="popup-layout">

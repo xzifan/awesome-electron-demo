@@ -1,11 +1,11 @@
 .sheet-container {
+  position: relative;
   font-size: 10px;
   width: 100%;
   position: relative;
   overflow-x: auto;
-  overflow-y: auto;
+  overflow-y: hidden;
   height: calc(100% - 100px);
-
 }
 
 .sheet-container ::-webkit-scrollbar-track{
