@@ -101,11 +101,6 @@ app.on('ready', ()=>{
   //       sheetCollection.insert(sheetContentJSON)
   //     } 
   //     console.log('Complete !')
-  //   })
-  //   var currentCollections = db.listCollections()
-  //   console.log("current collections:",currentCollections)
-  //   console.log("钟利军",  db.getCollection(currentCollections[0]).get(10))
-  //   // event.returnValue = currentCollections
   //  })
   // ipcMain.on('GetCollectionNamesFromDB',(event)=>{
   //   var currentCollections = db.listCollections()
@@ -113,10 +108,10 @@ app.on('ready', ()=>{
   //   event.returnValue = currentCollections
   // })
   // 开发环境
-  // mainWindow.loadURL('http://localhost:3000/');
+  mainWindow.loadURL('http://localhost:3000/');
 
   // 生产环境 
-  mainWindow.loadFile(`./build/index.html`);
+  // mainWindow.loadFile(`./build/index.html`);
 
   // 打开开发者工具，默认不打开
   // mainWindow.webContents.openDevTools()

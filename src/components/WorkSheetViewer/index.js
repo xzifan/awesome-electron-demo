@@ -1,16 +1,15 @@
 import { Table, Button, Modal } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
 import XLSX from 'xlsx';
 import './index.scss'
 import { ArrowRightOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
-import ScriptModal from '../ScriptModal';
 const electron = window.require('electron');
 
 const {ipcRenderer} = electron;
 
 const WorksheetViewer = (props) => {
   const workbookParams = props.workbookParams
-  const [showSelectScript, setShowSelectScript] = useState(false)
+  // const [showSelectScript, setShowSelectScript] = useState(false)
   const worksheet = props.currentSheet
   const worksheetJSON = XLSX.utils.sheet_to_json(worksheet)
   console.log(worksheet['!ref'],XLSX.utils.decode_range(worksheet['!ref']))
@@ -75,8 +74,9 @@ const WorksheetViewer = (props) => {
       },
     })
   }
-  return <><Button className="worksheet-confirm-btn" type="primary" onClick={onConfirmSheet}>转换该表 <ArrowRightOutlined /></Button>
-      <ScriptModal setShowSelectScript={setShowSelectScript} showSelectScript={showSelectScript}/>
+  return <>
+      <Button className="worksheet-confirm-btn" type="primary" onClick={onConfirmSheet}>转换该表 <ArrowRightOutlined /></Button>
+      {/* <ScriptModal setShowSelectScript={setShowSelectScript} showSelectScript={showSelectScript}/> */}
       <div className="sheet-container">
         {
           props.currentSheet && 
